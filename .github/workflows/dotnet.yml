@@ -3,6 +3,12 @@
 
 name: .NET
 
+env:
+  registryName: "thuradevopsreg.azurecr.io" 
+  repositoryName: "wth/dotnetcoreapp"
+  dockerFolderPath: "Application/src/RazorPagesTestSample"
+  tag: "${{ github.run_number}}"
+
 on:
   push:
     branches: [ "main" ]
@@ -15,11 +21,6 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-    env:
-      registryName: "thuradevopsreg.azurecr.io" 
-      repositoryName: "wth/dotnetcoreapp"
-      dockerFolderPath: "Application/src/RazorPagesTestSample"
-      tag: "${{ github.run_number}}"
 
     steps:
     - uses: actions/checkout@v3
