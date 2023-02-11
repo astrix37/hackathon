@@ -57,19 +57,7 @@ jobs:
       uses: Azure/webapps-deploy@v2.2.6
       with:
         app-name: thuradevops-dev
-        images: $registryName/$repositoryName:$tag
-        
-        
-        
-        
-        
-        
-        
-      
-      
-      
-      
-      
+        images: "${{env.registryName}}/${{env.repositoryName}}:${{env.tag}}"
       
       
       
