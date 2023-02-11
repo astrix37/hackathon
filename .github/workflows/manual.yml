@@ -16,7 +16,7 @@ jobs:
   greet:
     runs-on: ubuntu-latest
     env:
-      targetEnv: test
+      targetEnv: prod
     steps:
     - name: Send greeting
       run: echo "Hello ${{ github.event.inputs.name }}"      
