@@ -1,0 +1,34 @@
+# This is a basic workflow that is manually triggered
+
+name: Alexs Workflow
+
+# Controls when the action will run. Workflow runs when manually triggered using the UI
+# or API.
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        description: 'Person to greet'
+        default: 'World'
+        required: true
+
+jobs:
+  greet:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Send greeting
+      run: echo "Hello ${{ github.event.inputs.name }}"      
+    - name: Checkout
+      uses: actions/checkout@v3.3.0
+    - name: Azure Login
+      uses: Azure/login@v1.4.6
+      with:
+        # Paste output of `az ad sp create-for-rbac` as value of secret variable: AZURE_CREDENTIALS
+        creds: ${{ secrets.AZURE_SP_SECRET }}
+    - name: Deploy Azure Resource Manager (ARM) Template
+      uses: Azure/arm-deploy@v1.0.9
+      with:
+        scope: 'resourcegroup'
+        resourceGroupName: AlexColvin
+        template: ./ARM-Templates/container-webapp-template.json
+        subscriptionId: ${{ secrets.SUBSCRIPTION_ID }}
